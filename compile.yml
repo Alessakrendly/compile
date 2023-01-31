@@ -1,0 +1,22 @@
+name: Building Kernel
+
+on: 
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Start Build
+      env:
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT: ${{ secrets.TELEGRAM_CHAT }}
+        BRANCH: ${{ secrets.BRANCH }}
+
+      run: |
+        sudo apt update && sudo apt upgrade -y
+        wget https://raw.githubusercontent.com/Alessakrendly/my-script/main/build.sh
+        bash build.sh
